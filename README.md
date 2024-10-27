@@ -31,10 +31,7 @@ HealU is built as a community service project (CSP) that offers a solution to th
 ## Technologies Used
 
 - **Frontend**: React
-- **Backend**: Node.js, Express.js
-- **Styling**: CSS3, with a dark theme for health-centric aesthetics
-- **Database**: MongoDB (or any other backend database you may choose)
-- **APIs**: External APIs (if applicable) to fetch location-specific data
+- **Styling**: CSS3, with a light theme for health-centric aesthetics
 - **Additional Libraries**: React Router for routing, Axios for API requests, and Chatbot integration for user assistance
 
 ## Installation and Setup
@@ -55,15 +52,7 @@ HealU is built as a community service project (CSP) that offers a solution to th
     npm start
     ```
 
-4. **Backend Setup**:
-    - Ensure Node.js and MongoDB (or your chosen database) are set up locally or on a cloud platform.
-    - Configure backend environment variables for API keys and database connections.
-    - Start the backend server:
-      ```bash
-      npm run backend
-      ```
-
-5. **Building for Production**:
+4. **Building for Production**:
     ```bash
     npm run build
     ```
@@ -73,7 +62,6 @@ HealU is built as a community service project (CSP) that offers a solution to th
 1. Visit the main page of **HealU**.
 2. Click on **Meal Planner** to enter your location and other details.
 3. Review personalized meal recommendations with detailed nutritional information.
-4. Place orders directly or find local sources for ingredients.
 
 ## Folder Structure
 
@@ -88,10 +76,22 @@ healu/
 │   │   └── logo.jpg
 │   ├── components/
 │   │   ├── HomePage/
-│   │   │   ├── HomePage.js
+│   │   │   ├── index.js
 │   │   │   └── index.css
 │   │   ├── MealPlanner/
 │   │   │   ├── MealPlanner.js
+│   │   │   └── index.css
+│   │   ├── HowToUse/
+│   │   │   ├── index.js
+│   │   │   └── index.css
+│   │   ├── NavBar/
+│   │   │   ├── index.js
+│   │   │   └── index.css
+│   │   ├── Footer/
+│   │   │   ├── index.js
+│   │   │   └── index.css
+│   │   ├── BMICalculator/
+│   │   │   ├── index.js
 │   │   │   └── index.css
 │   └── App.js
 │   └── index.js

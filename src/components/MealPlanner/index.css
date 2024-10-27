@@ -1,0 +1,112 @@
+.meal-planner-container {
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .health-matters-icon {
+    height: 20px;
+    width: 30px;
+  }
+  
+  .mealplanner-tag {
+    font-family: 'DM Sans';
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #B4B4B4;
+    color: #2C2F24;
+    width: 140px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+  }
+  
+  .mealplanner-description-container {
+    font-family: 'DM Sans';
+    padding-left: 20px;
+    display: flex;
+    width: 100%;
+  }
+  
+  .mealplanner-description-sub-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .mealplanner-heading {
+    margin-top: 20px;
+    font-size: 50px;
+  }
+  
+  .colour-primary {
+    color: blueviolet;
+  }
+  
+  .mealplanner-description {
+    color: #8A8585;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .mealplanner-features {
+    padding-left: 20px;
+  }
+  .search-input-meal {
+    padding: 10px;
+    width: 300px;
+    outline: none;
+    border-radius: 12px;
+    border-style: solid;
+    margin-top: 20px;
+    font-size: 15px;
+    font-family: 'DM Sans';
+    border-color: #B4B4B4;
+  }
+  
+  .features-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .each-feature-container {
+    background-color: #d2d0d0;
+  }
+  
+  
+  
+  .feature {
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d2d0d0;
+    margin: 20px;
+    border-radius: 12px;
+  }
+  @media screen and (min-width: 768px) {
+    .feature {
+        width: 45%;
+    }
+  }
+  .feature-heading {
+    font-size: 20px;
+    margin-top: 10px;
+    color: #2C2F24;
+  }
+  
+  .feature-description {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #666;
+    max-width: 250px;
+  }
+  
+  .feature-image {
+    height: 60px;
+    width: 60px;
+  }

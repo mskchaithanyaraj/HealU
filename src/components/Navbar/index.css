@@ -1,0 +1,46 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 15px;
+}
+.small-heart-icon {
+    height: 20px;
+    width: 30px;
+}
+.navbar-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 600px;
+    list-style-type: none;
+}
+
+.healu-name {
+    font-style: italic;
+    font-family: "Lobster Two";
+    font-size: 30px;
+    cursor: pointer;
+}
+.cancel-link-styling {
+    text-decoration: none;
+    color: #2C2F24;
+}
+.navbar-link-item {
+    color: #2C2F24;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 13px;
+    font-size: 15px;
+    font-family: 'Poppins';
+}
+
+.navbar-link-item:hover {
+    background-color: rgba(2, 0, 0, 0.5); /* Light white with some transparency */
+    color: aliceblue;
+}

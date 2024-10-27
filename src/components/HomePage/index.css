@@ -1,0 +1,53 @@
+* {
+   margin: 0;
+   padding: 0;
+} 
+.main-container {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../assets/background.png');
+    background-size: cover;
+    min-height: 100vh;
+    background-size: cover;
+    padding: 0.1px;
+}
+.home-healu-name {
+    font-family: 'Lobster Two';
+    font-style: italic;
+    color: #2C2F24;
+}
+.homepage-section {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+    min-height: 80vh;
+}
+.home-page-description-container {
+    max-width: 700px;
+    font-family: 'DM Sans';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.homepage-main-heading {
+    color: #2C2F24;
+    font-size: 40px;
+    font-family: 'Playfair Display';
+}
+.homepage-description {
+    color: #2C2F24;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.plate-of-meal-img {
+    border-style: solid;
+    border-color: transparent;
+    height: 500px;
+}
+
+@media screen and (max-width: 767px) {
+    .home-page-description-container {
+        color: #000;
+    }
+}

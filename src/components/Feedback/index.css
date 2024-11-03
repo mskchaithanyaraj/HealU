@@ -45,3 +45,30 @@
     background-color: #0056b3; /* Darker blue on hover */
   }
   
+  .previous-feedbacks {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .feedback-card {
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .feedback-date {
+    font-size: 0.8rem;
+    color: #ddd;
+    margin-top: 5px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

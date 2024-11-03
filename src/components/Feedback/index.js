@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
+import Navbar from '../Navbar';
 
 const Feedback = () => {
   const [feedback, setFeedback] = useState('');
@@ -31,25 +32,28 @@ const Feedback = () => {
   
 
   return (
-    <div className="feedback-container">
-      <h2 className="feedback-title">Feedback</h2>
-      {submitted ? (
-        <p className="feedback-thank-you">Thank you for your feedback!</p>
-      ) : (
-        <form onSubmit={handleSubmit} className="feedback-form">
-          <textarea
-            value={feedback}
-            onChange={handleFeedbackChange}
-            placeholder="Write your feedback here..."
-            required
-            rows="5"
-            className="feedback-textarea"
-          />
-          <br />
-          <button type="submit" className="feedback-submit-button">Submit Feedback</button>
-        </form>
-      )}
-    </div>
+    <>
+        <Navbar />
+        <div className="feedback-container">
+        <h2 className="feedback-title">Feedback</h2>
+        {submitted ? (
+            <p className="feedback-thank-you">Thank you for your feedback!</p>
+        ) : (
+            <form onSubmit={handleSubmit} className="feedback-form">
+            <textarea
+                value={feedback}
+                onChange={handleFeedbackChange}
+                placeholder="Write your feedback here..."
+                required
+                rows="5"
+                className="feedback-textarea"
+            />
+            <br />
+            <button type="submit" className="feedback-submit-button">Submit Feedback</button>
+            </form>
+        )}
+        </div>
+    </>
   );
 };
 

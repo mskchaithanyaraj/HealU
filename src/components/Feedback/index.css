@@ -1,74 +1,170 @@
 .feedback-container {
-    max-width: 500px;
     margin: auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .feedback-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .feedback-thank-you {
-    font-size: 18px;
-    color: #4CAF50; /* Green for success message */
-  }
-  
-  .feedback-form {
+    background: linear-gradient(to bottom, #ffffff, #551a1a);
+    min-height: 90vh;
+    font-family: 'DM Sans';
     display: flex;
     flex-direction: column;
-  }
-  
-  .feedback-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none; /* Prevents resizing */
-  }
-  
-  .feedback-submit-button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff; /* Blue color */
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-textarea {
+    width: 80%;
+    background-color: #1d2929;
+    opacity: 0.4;
+    outline: none;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 17px;
+    font-family: 'DM Sans';
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition */
-  }
-  
-  .feedback-submit-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
-  .previous-feedbacks {
-    margin-top: 20px;
+}
+.feedback-title {
+    background: linear-gradient(to right, #374343, #ffffff); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    font-size: 50px; 
+    font-weight: bold;
+}
+.inputs-container {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .feedback-card {
+    flex-direction: row;
+}
+
+.input-feedback-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-feedback-description {
+    width: 40%; 
+    text-align: center;
+}
+.feedback-description{
+    background: linear-gradient(to right, #96a9a9, #04040c); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    font-size: 50px; 
+    font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+    .inputs-container {
+        flex-direction: column;
+    }
+    .input-feedback-description  {
+        width: 100%;
+    }
+    .feedback-description {
+        font-size: 30px;
+    }
+    .input-feedback-container {
+        order: 2;
+    }
+    .input-feedback-description {
+        order: 1;
+    }
+}
+.recent-feedbacks {
+    margin-top: 20px;
+}
+
+.recent-feedbacks h3 {
+    background: linear-gradient(to bottom right, #2c3e50, #34495e);
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    font-size: 50px; 
+    font-weight: bold;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .recent-feedbacks h3 {
+        font-size: 30px;
+    }
+}
+.previous-feedbacks {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line */
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px; /* Space between feedback cards */
+    width: 100%; /* Make it responsive and centered */
+    max-width: 900px; /* Set a maximum width for larger screens */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Add some padding for better spacing */
+    border-radius: 15px; /* Rounded corners */
+    background: linear-gradient(to bottom right, #2c3e50, #34495e); /* Dark gradient background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+}
+
+.feedback-card {
     padding: 15px;
     border-radius: 10px;
     color: #fff;
     font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, #4e54c8, #8f94fb); /* Gradient background for cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for the feedback cards */
     animation: fadeIn 0.5s ease-in;
-  }
-  
-  .feedback-date {
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+    max-width: 50%;
+}
+
+.feedback-card:hover {
+    transform: scale(1.02); /* Slightly enlarge the card on hover */
+}
+
+
+.feedback-date {
     font-size: 0.8rem;
     color: #ddd;
     margin-top: 5px;
+    text-align: right; /* Align date to the right for a cleaner look */
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #071013, #8787d1);
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #ccc; /* Gray color for disabled state */
+    cursor: not-allowed;
+}
+.pagination button:hover {
+    background: linear-gradient(90deg,#8787d1,#071013);
+}
+.btn-submit {
+    margin-top: 20px;
+    background: linear-gradient(90deg, #071013, #8787d1);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  @keyframes fadeIn {
+  .btn-submit:hover {
+    background: linear-gradient(90deg,#8787d1,#071013);
+  }
+@keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-  
+}

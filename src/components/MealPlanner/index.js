@@ -20,7 +20,7 @@ const MealPlanner = () => {
           <p className='mealplanner-description'>Using your BMI index we calculate whether the dish is suitable for you.</p>
           <input type='search' placeholder='Search Here (not ready yet)' className='search-input-meal' />
         </div>
-        <img src={doctorImage} alt='doctor' />
+        <img src={doctorImage} alt='doctor' className='doctor-img'/>
       </div>
       <div className='mealplanner-features'>
         <h1>Features we provide</h1>

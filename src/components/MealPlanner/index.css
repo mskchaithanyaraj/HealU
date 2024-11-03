@@ -110,3 +110,26 @@
     height: 60px;
     width: 60px;
   }
+
+  @media screen and (max-width: 767px) {
+    .doctor-img {
+      display: none;
+    }
+    .mealplanner-description-container  {
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .mealplanner-heading {
+      font-size: 30px;
+      max-width: 75%;
+    }
+    .mealplanner-description {
+      font-size: 21px;
+      max-width: 75%;
+    }
+    .features-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }

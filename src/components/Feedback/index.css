@@ -1,0 +1,47 @@
+.feedback-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .feedback-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .feedback-thank-you {
+    font-size: 18px;
+    color: #4CAF50; /* Green for success message */
+  }
+  
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feedback-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; /* Prevents resizing */
+  }
+  
+  .feedback-submit-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .feedback-submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  

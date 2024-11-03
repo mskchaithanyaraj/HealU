@@ -52,7 +52,7 @@ const HowToUse = () => {
         </div>
         <img src={CornImage} alt = 'corn' className='threeD-image'/>
       </div>
-      <Footer />
+      <Footer />  
     </>
   );
 };

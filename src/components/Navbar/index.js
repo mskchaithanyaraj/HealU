@@ -37,7 +37,9 @@ const Navbar = () => {
         <li>
           <Link to="/bmi-calculator" className='navbar-link-item' onClick={toggleMenu}>Calculate BMI</Link>
         </li>
-        
+        <li>
+          <Link to="/feedback" className='navbar-link-item' onClick={toggleMenu}>Feedback</Link>
+        </li>
       </ul>
     
     </nav>

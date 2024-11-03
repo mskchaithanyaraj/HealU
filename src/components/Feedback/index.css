@@ -111,7 +111,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for the feedback cards */
     animation: fadeIn 0.5s ease-in;
     transition: transform 0.3s; /* Smooth transition for hover effect */
-    max-width: 50%;
+    max-width: 45%;
 }
 
 .feedback-card:hover {

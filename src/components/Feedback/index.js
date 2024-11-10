@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { TailSpin } from 'react-loader-spinner';
 import './index.css';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 
 const Feedback = () => {
-  // Initialize previousFeedbacks with default feedbacks
   const [previousFeedbacks, setPreviousFeedbacks] = useState([]);
-  
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const feedbackPerPage = 4;
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
+      setLoading(true);
       try {
         const response = await fetch('https://healu-backend.onrender.com/api/feedback');
         if (response.ok) {
           const data = await response.json();
-          // Append fetched feedbacks to the existing previousFeedbacks
-          setPreviousFeedbacks(prevFeedbacks => [...prevFeedbacks, ...data]);
+          setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);
         }
       } catch (error) {
         console.error('Error fetching previous feedbacks:', error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchFeedbacks();
@@ -72,8 +74,8 @@ const Feedback = () => {
     <>
       <Navbar />
       <div className="feedback-container">
-        <div className='inputs-container'>
-          <div className='input-feedback-container'>
+        <div className="inputs-container">
+          <div className="input-feedback-container">
             <h2 className="feedback-title">Feedback</h2>
             {submitted ? (
               <p className="feedback-thank-you">Thank you for your feedback!</p>
@@ -93,22 +95,32 @@ const Feedback = () => {
             )}
           </div>
 
-          <div className='input-feedback-description'>
-            <h1 className='feedback-description'>Give us a Chance <span>to Improve</span></h1>
+          <div className="input-feedback-description">
+            <h1 className="feedback-description">Give us a Chance <span>to Improve</span></h1>
           </div>
         </div>
 
-        <div className='recent-feedbacks'>
+        <div className="recent-feedbacks">
           <h3>Most Recent Feedbacks</h3>
-          <div className="previous-feedbacks">
-            {displayedFeedbacks.map((fb, index) => (
+          {loading ? (
+            <div className="spinner-container">
+              <TailSpin
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="loading-spinner"
+              />
+            </div>
+          ) : (
+            <div className="previous-feedbacks">
+              {displayedFeedbacks.map((fb, index) => (
                 <div key={index} className="feedback-card">
-                    <p>{fb.message}</p>
-                    <span className="feedback-date">{new Date(fb.createdAt).toLocaleDateString()}</span>
+                  <p>{fb.message}</p>
+                  <span className="feedback-date">{new Date(fb.createdAt).toLocaleDateString()}</span>
                 </div>
-            ))}
-        </div>
-
+              ))}
+            </div>
+          )}
           <div className="pagination">
             <button onClick={handlePrevPage} disabled={currentPage === 0}>&lt; Prev</button>
             <button onClick={handleNextPage} disabled={currentPage >= totalPages - 1}>Next &gt;</button>

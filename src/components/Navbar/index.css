@@ -1,90 +1,88 @@
 /* Navbar container */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 15px;
 }
 
 /* Navbar items for desktop */
 .navbar-items {
-    display: flex;
-    justify-content: space-around;
-    width: 600px;
-    list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  width: 600px;
+  list-style-type: none;
 }
 
 .small-heart-icon {
-    height: 20px;
-    width: 30px;
+  height: 20px;
+  width: 30px;
 }
 
 /* Style for navbar links */
 .navbar-link-item {
-    color: #2C2F24;
-    text-decoration: none;
-    padding: 12px;
-    border-radius: 13px;
-    font-size: 15px;
-    font-family: 'Poppins';
+  color: #2c2f24;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 13px;
+  font-size: 15px;
+  font-family: "Poppins";
 }
 
 .navbar-link-item:hover {
-    background-color: rgba(2, 0, 0, 0.5);
-    color: aliceblue;
+  background-color: rgba(2, 0, 0, 0.5);
+  color: aliceblue;
 }
 
 /* Mobile styles */
 .menu-toggle-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
 }
 .cancel-link-styling {
-    text-decoration: none;
-    color: #2C2F24;
-
+  text-decoration: none;
+  color: #2c2f24;
 }
 
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
-    .navbar-items {
-        display: none; /* Hide navbar items initially on mobile */
-        flex-direction: column;
-        position: absolute;
-        top: 100px;
-        left: 0;
-        width: 90%;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    .navbar-items.show-menu {
-        display: flex; /* Show the navbar items when menu is open */
-    }
+  .navbar-items {
+    display: none; /* Hide navbar items initially on mobile */
+    flex-direction: column;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 90%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
 
-    .menu-toggle-icon {
-        display: block; /* Display the toggler icon on mobile */
-        color: #2C2F24;
-    }
-    
-    .navbar-link-item {
-        font-size: 20px;
-        padding: 10px; /* Add padding for spacing */
-        display: block; /* Ensures each link takes full width */
-        width: 100%; /* Ensures the link fills the width of the navbar */
-        text-align: center; /* Center the text for better alignment */
-        color: #2C2F24; /* Ensure the link color matches your design */
-    }
+  .navbar-items.show-menu {
+    display: flex; /* Show the navbar items when menu is open */
+  }
 
-    .navbar-link-item:hover {
-        background-color: rgba(2, 0, 0, 0.5); 
-        color: aliceblue; 
-    }
+  .menu-toggle-icon {
+    display: block; /* Display the toggler icon on mobile */
+    color: #2c2f24;
+  }
+
+  .navbar-link-item {
+    font-size: 20px;
+    padding: 10px; /* Add padding for spacing */
+    display: block; /* Ensures each link takes full width */
+    width: 100%; /* Ensures the link fills the width of the navbar */
+    text-align: center; /* Center the text for better alignment */
+    color: #2c2f24; /* Ensure the link color matches your design */
+  }
+
+  .navbar-link-item:hover {
+    background-color: rgba(2, 0, 0, 0.5);
+    color: aliceblue;
+  }
 }
-

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { TailSpin } from 'react-loader-spinner';
-import './index.css';
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+import React, { useState, useEffect } from "react";
+import { TailSpin } from "react-loader-spinner";
+import "./index.css";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const Feedback = () => {
   const [previousFeedbacks, setPreviousFeedbacks] = useState([]);
-  const [feedback, setFeedback] = useState('');
+  const [feedback, setFeedback] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,13 +16,15 @@ const Feedback = () => {
     const fetchFeedbacks = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://healu-backend.onrender.com/api/feedback');
+        const response = await fetch(
+          "https://healu-backend.onrender.com/api/feedback"
+        );
         if (response.ok) {
           const data = await response.json();
           setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);
         }
       } catch (error) {
-        console.error('Error fetching previous feedbacks:', error);
+        console.error("Error fetching previous feedbacks:", error);
       } finally {
         setLoading(false);
       }
@@ -37,20 +39,23 @@ const Feedback = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('https://healu-backend.onrender.com/api/feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: feedback }),
-      });
+      const response = await fetch(
+        "https://healu-backend.onrender.com/api/feedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: feedback }),
+        }
+      );
 
       if (response.ok) {
-        setFeedback('');
+        setFeedback("");
         setSubmitted(true);
       }
     } catch (error) {
-      console.error('Error submitting feedback:', error);
+      console.error("Error submitting feedback:", error);
     }
   };
 
@@ -68,7 +73,10 @@ const Feedback = () => {
     }
   };
 
-  const displayedFeedbacks = previousFeedbacks.slice(currentPage * feedbackPerPage, (currentPage + 1) * feedbackPerPage);
+  const displayedFeedbacks = previousFeedbacks.slice(
+    currentPage * feedbackPerPage,
+    (currentPage + 1) * feedbackPerPage
+  );
 
   return (
     <>
@@ -90,13 +98,17 @@ const Feedback = () => {
                   className="feedback-textarea"
                 />
                 <br />
-                <button type="submit" className="btn-submit">Submit Feedback</button>
+                <button type="submit" className="btn-submit">
+                  Submit Feedback
+                </button>
               </form>
             )}
           </div>
 
           <div className="input-feedback-description">
-            <h1 className="feedback-description">Give us a Chance <span>to Improve</span></h1>
+            <h1 className="feedback-description">
+              Give us a Chance <span>to Improve</span>
+            </h1>
           </div>
         </div>
 
@@ -116,14 +128,23 @@ const Feedback = () => {
               {displayedFeedbacks.map((fb, index) => (
                 <div key={index} className="feedback-card">
                   <p>{fb.message}</p>
-                  <span className="feedback-date">{new Date(fb.createdAt).toLocaleDateString()}</span>
+                  <span className="feedback-date">
+                    {new Date(fb.createdAt).toLocaleDateString()}
+                  </span>
                 </div>
               ))}
             </div>
           )}
           <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 0}>&lt; Prev</button>
-            <button onClick={handleNextPage} disabled={currentPage >= totalPages - 1}>Next &gt;</button>
+            <button onClick={handlePrevPage} disabled={currentPage === 0}>
+              &lt; Prev
+            </button>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage >= totalPages - 1}
+            >
+              Next &gt;
+            </button>
           </div>
         </div>
       </div>

@@ -107,7 +107,7 @@ const Feedback = () => {
               <TailSpin
                 height="80"
                 width="80"
-                color="#4fa94d"
+                color="#ffffff"
                 ariaLabel="loading-spinner"
               />
             </div>

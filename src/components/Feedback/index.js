@@ -3,6 +3,7 @@ import { TailSpin } from "react-loader-spinner";
 import "./index.css";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Feedback = () => {
   const [previousFeedbacks, setPreviousFeedbacks] = useState([]);
@@ -81,28 +82,59 @@ const Feedback = () => {
   return (
     <>
       <Navbar />
-      <div className="feedback-container">
-        <div className="inputs-container">
+      <motion.div
+        className="feedback-container"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="inputs-container"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <div className="input-feedback-container">
             <h2 className="feedback-title">Feedback</h2>
-            {submitted ? (
-              <p className="feedback-thank-you">Thank you for your feedback!</p>
-            ) : (
-              <form onSubmit={handleSubmit} className="feedback-form">
-                <textarea
-                  value={feedback}
-                  onChange={handleFeedbackChange}
-                  placeholder="Write your feedback here..."
-                  required
-                  rows="15"
-                  className="feedback-textarea"
-                />
-                <br />
-                <button type="submit" className="btn-submit">
-                  Submit Feedback
-                </button>
-              </form>
-            )}
+            <AnimatePresence>
+              {submitted ? (
+                <motion.p
+                  className="feedback-thank-you"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  Thank you for your feedback!
+                </motion.p>
+              ) : (
+                <motion.form
+                  onSubmit={handleSubmit}
+                  className="feedback-form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <textarea
+                    value={feedback}
+                    onChange={handleFeedbackChange}
+                    placeholder="Write your feedback here..."
+                    required
+                    rows="15"
+                    className="feedback-textarea"
+                  />
+                  <br />
+                  <motion.button
+                    type="submit"
+                    className="btn-submit"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Submit Feedback
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="input-feedback-description">
@@ -110,9 +142,14 @@ const Feedback = () => {
               Give us a Chance <span>to Improve</span>
             </h1>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="recent-feedbacks">
+        <motion.div
+          className="recent-feedbacks"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <h3>Most Recent Feedbacks</h3>
           {loading ? (
             <div className="spinner-container">
@@ -124,30 +161,57 @@ const Feedback = () => {
               />
             </div>
           ) : (
-            <div className="previous-feedbacks">
+            <motion.div
+              className="previous-feedbacks"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
               {displayedFeedbacks.map((fb, index) => (
-                <div key={index} className="feedback-card">
+                <motion.div
+                  key={index}
+                  className="feedback-card"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
                   <p>{fb.message}</p>
                   <span className="feedback-date">
                     {new Date(fb.createdAt).toLocaleDateString()}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )}
           <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 0}>
+            <motion.button
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               &lt; Prev
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={handleNextPage}
               disabled={currentPage >= totalPages - 1}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Next &gt;
-            </button>
+            </motion.button>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       <Footer />
     </>
   );

@@ -21,6 +21,7 @@
   font-family: "DM Sans";
   color: white;
 }
+
 .feedback-title {
   background: linear-gradient(to right, #374343, #ffffff);
   -webkit-background-clip: text;
@@ -29,6 +30,7 @@
   font-size: 50px;
   font-weight: bold;
 }
+
 .inputs-container {
   display: flex;
   flex-direction: row;
@@ -43,6 +45,7 @@
   width: 40%;
   text-align: center;
 }
+
 .feedback-description {
   background: linear-gradient(to right, #96a9a9, #04040c);
   -webkit-background-clip: text;
@@ -51,6 +54,7 @@
   font-size: 50px;
   font-weight: bold;
 }
+
 @media screen and (max-width: 767px) {
   .inputs-container {
     flex-direction: column;
@@ -68,6 +72,7 @@
     order: 1;
   }
 }
+
 .recent-feedbacks {
   margin-top: 20px;
 }
@@ -87,23 +92,20 @@
     font-size: 30px;
   }
 }
+
 .previous-feedbacks {
   display: flex;
-  flex-wrap: wrap; /* Allows cards to wrap to the next line */
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  gap: 15px; /* Space between feedback cards */
-  width: 100%; /* Make it responsive and centered */
-  max-width: 900px; /* Set a maximum width for larger screens */
-  margin: auto; /* Center the container */
-  padding: 20px; /* Add some padding for better spacing */
-  border-radius: 15px; /* Rounded corners */
-  background: linear-gradient(
-    to bottom right,
-    #2c3e50,
-    #34495e
-  ); /* Dark gradient background */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+  gap: 15px;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: linear-gradient(to bottom right, #2c3e50, #34495e);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .feedback-card {
@@ -111,26 +113,21 @@
   border-radius: 10px;
   color: #fff;
   font-size: 1rem;
-  background: linear-gradient(
-    to right,
-    #4e54c8,
-    #8f94fb
-  ); /* Gradient background for cards */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for the feedback cards */
-  animation: fadeIn 0.5s ease-in;
-  transition: transform 0.3s; /* Smooth transition for hover effect */
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
   max-width: 45%;
 }
 
 .feedback-card:hover {
-  transform: scale(1.02); /* Slightly enlarge the card on hover */
+  transform: scale(1.02);
 }
 
 .feedback-date {
   font-size: 0.8rem;
   color: #ddd;
   margin-top: 5px;
-  text-align: right; /* Align date to the right for a cleaner look */
+  text-align: right;
 }
 
 .pagination {
@@ -149,12 +146,14 @@
 }
 
 .pagination button:disabled {
-  background-color: #ccc; /* Gray color for disabled state */
+  background-color: #ccc;
   cursor: not-allowed;
 }
-.pagination button:hover {
+
+.pagination button:hover:not(:disabled) {
   background: linear-gradient(90deg, #8787d1, #071013);
 }
+
 .btn-submit {
   margin-top: 20px;
   background: linear-gradient(90deg, #071013, #8787d1);
@@ -170,6 +169,17 @@
 .btn-submit:hover {
   background: linear-gradient(90deg, #8787d1, #071013);
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  border-radius: 15px;
+  background: linear-gradient(to bottom right, #2c3e50, #34495e);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -179,17 +189,6 @@
   }
 }
 
-/* Spinner Container */
-.spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  border-radius: 15px; /* Rounded corners */
-  background: linear-gradient(
-    to bottom right,
-    #2c3e50,
-    #34495e
-  ); /* Dark gradient background */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+.feedback-thank-you {
+  animation: fadeIn 0.5s ease-out;
 }

@@ -10,29 +10,6 @@ import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
-  const handleRegister = async (userData) => {
-    try {
-      const response = await fetch(
-        "https://healu-backend.onrender.com/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
-        return;
-      }
-    } catch (error) {
-      alert("An error occurred during registration. Please try again later.");
-    }
-  };
-
   return (
     <Router>
       <Routes>
@@ -57,10 +34,7 @@ const App = () => {
 
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/register"
-          element={<Register onSubmit={handleRegister} />}
-        />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

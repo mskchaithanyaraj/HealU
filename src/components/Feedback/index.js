@@ -18,7 +18,7 @@ const Feedback = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://healu-backend.onrender.comapi/feedback"
+          "https://healu-backend.onrender.com/api/feedback"
         );
         if (response.ok) {
           const data = await response.json();

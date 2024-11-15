@@ -197,9 +197,9 @@ const Feedback = () => {
                   >
                     {fb.isOpen ? "- Read Less" : "... Read More"}
                   </span>
-                  <span className="feedback-date">
+                  <p className="feedback-date">
                     {new Date(fb.createdAt).toLocaleDateString()}
-                  </span>
+                  </p>
                 </motion.div>
               ))}
             </motion.div>

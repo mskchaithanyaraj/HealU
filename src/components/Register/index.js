@@ -18,7 +18,8 @@ const Register = ({ onSubmit }) => {
     }
   }, [navigate]);
 
-  const handleRegister = async (userData) => {
+  const handleRegister = async (event, userData) => {
+    event.preventDefault();
     try {
       const response = await fetch(
         "https://healu-backend.onrender.com/api/auth/register",
@@ -38,6 +39,7 @@ const Register = ({ onSubmit }) => {
       }
       navigate("/login", { replace: true });
     } catch (error) {
+      console.log(error);
       alert("An error occurred during registration. Please try again later.");
     }
   };
@@ -49,7 +51,7 @@ const Register = ({ onSubmit }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-        onSubmit={handleRegister}
+        onSubmit={(e) => handleRegister(e, { email, password })}
         className="auth-form"
       >
         <h2 className="auth-title">Join HealU</h2>

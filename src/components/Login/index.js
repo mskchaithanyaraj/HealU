@@ -18,7 +18,8 @@ const Login = ({ onSubmit }) => {
     }
   }, [navigate]);
 
-  const handleLogin = async (credentials) => {
+  const handleLogin = async (event, credentials) => {
+    event.preventDefault();
     try {
       const response = await fetch(
         "https://healu-backend.onrender.com/api/auth/login",
@@ -53,7 +54,7 @@ const Login = ({ onSubmit }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-        onSubmit={handleLogin}
+        onSubmit={(e) => handleLogin(e, { email, password })}
         className="auth-form"
       >
         <h2 className="auth-title">Login to HealU</h2>

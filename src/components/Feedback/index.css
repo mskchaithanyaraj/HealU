@@ -7,33 +7,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-.feedback-textarea {
-  width: 80%;
-  background-color: #1d2929;
-  opacity: 0.4;
-  outline: none;
-  border-radius: 15px;
-  padding: 20px;
-  font-size: 17px;
-  font-family: "DM Sans";
-  color: white;
-}
-
-.feedback-title {
-  background: linear-gradient(to right, #374343, #ffffff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 50px;
-  font-weight: bold;
+  justify-content: flex-start; /* Align to top */
+  width: 100%; /* Ensure full width */
 }
 
 .inputs-container {
   display: flex;
   flex-direction: row;
+  width: 100%; /* Ensure full width */
+  gap: 20px;
+  justify-content: center; /* Center the content */
 }
 
 .input-feedback-container {
@@ -42,61 +25,19 @@
 }
 
 .input-feedback-description {
-  width: 40%;
+  width: 100%;
   text-align: center;
-}
-
-.feedback-description {
-  background: linear-gradient(to right, #96a9a9, #04040c);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 50px;
-  font-weight: bold;
-}
-
-@media screen and (max-width: 767px) {
-  .inputs-container {
-    flex-direction: column;
-  }
-  .input-feedback-description {
-    width: 100%;
-  }
-  .feedback-description {
-    font-size: 30px;
-  }
-  .input-feedback-container {
-    order: 2;
-  }
-  .input-feedback-description {
-    order: 1;
-  }
 }
 
 .recent-feedbacks {
   margin-top: 20px;
-}
-
-.recent-feedbacks h3 {
-  background: linear-gradient(to bottom right, #2c3e50, #34495e);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 50px;
-  font-weight: bold;
-  text-align: center;
-}
-
-@media screen and (max-width: 768px) {
-  .recent-feedbacks h3 {
-    font-size: 30px;
-  }
+  width: 100%; /* Ensure it occupies full width */
 }
 
 .previous-feedbacks {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center; /* Center feedback cards */
   align-items: center;
   gap: 15px;
   width: 100%;
@@ -116,23 +57,18 @@
   background: linear-gradient(to right, #4e54c8, #8f94fb);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s;
-  max-width: 45%;
+  width: 45%; /* Ensure feedback cards don't take too much space on larger screens */
+  max-width: 400px; /* Maximum card width */
 }
 
 .feedback-card:hover {
   transform: scale(1.02);
 }
 
-.feedback-date {
-  font-size: 0.8rem;
-  color: #ddd;
-  margin-top: 5px;
-  text-align: right;
-}
-
 .pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center pagination */
+  gap: 10px;
   margin-top: 10px;
 }
 
@@ -180,6 +116,57 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* For mobile view adjustments */
+@media screen and (max-width: 767px) {
+  .feedback-container {
+    padding: 10px; /* Adjust padding for mobile */
+  }
+
+  .inputs-container {
+    flex-direction: column;
+    gap: 10px; /* Add a smaller gap */
+  }
+
+  .input-feedback-description {
+    width: 100%;
+  }
+
+  .input-feedback-container {
+    order: 2;
+  }
+
+  .input-feedback-description {
+    order: 1;
+  }
+
+  .feedback-description {
+    font-size: 30px; /* Adjust font size */
+  }
+
+  .previous-feedbacks {
+    padding: 10px; /* Reduce padding for mobile */
+  }
+
+  .feedback-card {
+    width: 100%; /* Feedback card takes full width on mobile */
+    max-width: 100%; /* Remove max-width constraint */
+    font-size: 0.9rem; /* Adjust font size */
+  }
+
+  .pagination {
+    width: 100%; /* Full width for pagination */
+    justify-content: center; /* Center pagination buttons */
+  }
+
+  .pagination button {
+    padding: 8px 12px; /* Adjust button size */
+  }
+
+  .feedback-toggle {
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -193,78 +180,13 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-@media screen and (max-width: 767px) {
-  .inputs-container {
-    flex-direction: column;
-  }
-  .input-feedback-description {
-    width: 100%;
-  }
-  .feedback-description {
-    font-size: 30px;
-  }
-  .input-feedback-container {
-    order: 2;
-  }
-  .input-feedback-description {
-    order: 1;
-  }
+.feedback-toggle {
+  cursor: pointer;
+  font-size: 1.1rem; /* Slightly larger font size */
+  color: #0066cc; /* Different text color */
+  transition: color 0.3s ease;
+}
 
-  /* Feedback Cards on Mobile */
-  .previous-feedbacks {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .feedback-card {
-    width: 100%;
-    font-size: 0.9rem; /* Decrease font size for mobile */
-    margin-bottom: 10px;
-  }
-
-  .feedback-card:hover {
-    transform: scale(1);
-  }
-
-  /* Pagination buttons for mobile */
-  .pagination button {
-    padding: 8px 12px;
-    font-size: 0.9rem;
-  }
-
-  .feedback-thank-you {
-    font-size: 1rem; /* Adjust font size for mobile */
-  }
-
-  /* "Read More" Button Styling */
-  .feedback-card p {
-    max-height: 60px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .feedback-card p::after {
-    content: "... read more";
-    color: #ffffff;
-    position: absolute;
-    bottom: 5px;
-    right: 0;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-
-  .feedback-card.open p {
-    max-height: none;
-  }
-
-  .feedback-card.open p::after {
-    content: "... read less";
-    color: #ffffff;
-  }
-
-  /* Adjust Spinner Container */
-  .spinner-container {
-    height: 80px; /* Adjust height for smaller screens */
-  }
+.feedback-toggle:hover {
+  color: #004499; /* Darker color when hovering */
 }

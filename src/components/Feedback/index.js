@@ -22,12 +22,7 @@ const Feedback = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          // Add the isOpen property to each feedback
-          const feedbacksWithOpenState = data.map((fb) => ({
-            ...fb,
-            isOpen: false, // default state for expanded feedback
-          }));
-          setPreviousFeedbacks(feedbacksWithOpenState);
+          setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);
         }
       } catch (error) {
         console.error("Error fetching previous feedbacks:", error);
@@ -56,6 +51,7 @@ const Feedback = () => {
       if (response.ok) {
         setFeedback("");
         setSubmitted(true);
+        console.log(response);
       }
     } catch (error) {
       console.error("Error submitting feedback:", error);
@@ -186,18 +182,20 @@ const Feedback = () => {
               {displayedFeedbacks.map((fb, index) => (
                 <motion.div
                   key={index}
-                  className={`feedback-card ${fb.isOpen ? "open" : ""}`}
+                  className="feedback-card"
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 },
                   }}
                 >
-                  <p>{fb.isOpen ? fb.message : fb.message.substring(0, 100)}</p>
+                  <p>
+                    {fb.isOpen ? fb.message : `${fb.message.slice(0, 100)}...`}
+                  </p>
                   <span
-                    className="feedback-date"
+                    className="feedback-toggle"
                     onClick={() => handleReadMore(index)}
                   >
-                    {fb.isOpen ? "... read less" : "... read more"}
+                    {fb.isOpen ? "- Read Less" : "... Read More"}
                   </span>
                   <span className="feedback-date">
                     {new Date(fb.createdAt).toLocaleDateString()}

@@ -189,7 +189,7 @@ const Feedback = () => {
                   }}
                 >
                   <p>
-                    {fb.isOpen ? fb.message : `${fb.message.slice(0, 100)}...`}
+                    {fb.isOpen ? fb.message : `${fb.message.slice(0, 150)}...`}
                   </p>
                   <span
                     className="feedback-toggle"

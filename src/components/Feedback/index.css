@@ -192,3 +192,79 @@
 .feedback-thank-you {
   animation: fadeIn 0.5s ease-out;
 }
+
+@media screen and (max-width: 767px) {
+  .inputs-container {
+    flex-direction: column;
+  }
+  .input-feedback-description {
+    width: 100%;
+  }
+  .feedback-description {
+    font-size: 30px;
+  }
+  .input-feedback-container {
+    order: 2;
+  }
+  .input-feedback-description {
+    order: 1;
+  }
+
+  /* Feedback Cards on Mobile */
+  .previous-feedbacks {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .feedback-card {
+    width: 100%;
+    font-size: 0.9rem; /* Decrease font size for mobile */
+    margin-bottom: 10px;
+  }
+
+  .feedback-card:hover {
+    transform: scale(1);
+  }
+
+  /* Pagination buttons for mobile */
+  .pagination button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .feedback-thank-you {
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
+
+  /* "Read More" Button Styling */
+  .feedback-card p {
+    max-height: 60px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .feedback-card p::after {
+    content: "... read more";
+    color: #ffffff;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .feedback-card.open p {
+    max-height: none;
+  }
+
+  .feedback-card.open p::after {
+    content: "... read less";
+    color: #ffffff;
+  }
+
+  /* Adjust Spinner Container */
+  .spinner-container {
+    height: 80px; /* Adjust height for smaller screens */
+  }
+}

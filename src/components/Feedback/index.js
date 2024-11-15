@@ -22,7 +22,12 @@ const Feedback = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);
+          // Add the isOpen property to each feedback
+          const feedbacksWithOpenState = data.map((fb) => ({
+            ...fb,
+            isOpen: false, // default state for expanded feedback
+          }));
+          setPreviousFeedbacks(feedbacksWithOpenState);
         }
       } catch (error) {
         console.error("Error fetching previous feedbacks:", error);
@@ -51,11 +56,16 @@ const Feedback = () => {
       if (response.ok) {
         setFeedback("");
         setSubmitted(true);
-        console.log(response);
       }
     } catch (error) {
       console.error("Error submitting feedback:", error);
     }
+  };
+
+  const handleReadMore = (index) => {
+    const updatedFeedbacks = [...previousFeedbacks];
+    updatedFeedbacks[index].isOpen = !updatedFeedbacks[index].isOpen;
+    setPreviousFeedbacks(updatedFeedbacks);
   };
 
   const totalPages = Math.ceil(previousFeedbacks.length / feedbackPerPage);
@@ -176,13 +186,19 @@ const Feedback = () => {
               {displayedFeedbacks.map((fb, index) => (
                 <motion.div
                   key={index}
-                  className="feedback-card"
+                  className={`feedback-card ${fb.isOpen ? "open" : ""}`}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 },
                   }}
                 >
-                  <p>{fb.message}</p>
+                  <p>{fb.isOpen ? fb.message : fb.message.substring(0, 100)}</p>
+                  <span
+                    className="feedback-date"
+                    onClick={() => handleReadMore(index)}
+                  >
+                    {fb.isOpen ? "... read less" : "... read more"}
+                  </span>
                   <span className="feedback-date">
                     {new Date(fb.createdAt).toLocaleDateString()}
                   </span>

@@ -21,10 +21,7 @@
   font-size: 2.5rem;
   margin-bottom: 20px;
   text-align: center;
-  background: linear-gradient(to right, #374343, #d1caca);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #374343;
 }
 
 .auth-input {
@@ -65,7 +62,7 @@
 }
 
 .auth-switch a {
-  color: #8787d1;
+  color: #000;
   text-decoration: none;
   font-weight: bold;
 }

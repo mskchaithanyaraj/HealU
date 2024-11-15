@@ -17,9 +17,7 @@ const Feedback = () => {
     const fetchFeedbacks = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          "https://healu-backend.onrender.com/api/feedback"
-        );
+        const response = await fetch("http://localhost:5000/api/feedback");
         if (response.ok) {
           const data = await response.json();
           setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);
@@ -40,20 +38,18 @@ const Feedback = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        "https://healu-backend.onrender.com/api/feedback",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: feedback }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: feedback }),
+      });
 
       if (response.ok) {
         setFeedback("");
         setSubmitted(true);
+        console.log(response);
       }
     } catch (error) {
       console.error("Error submitting feedback:", error);

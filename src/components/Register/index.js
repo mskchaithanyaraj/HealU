@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import "./index.css";
 
 const Register = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Cookies.get("authToken");
+    if (token) {
+      // Redirect to home if token exists
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

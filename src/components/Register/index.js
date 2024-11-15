@@ -55,7 +55,7 @@ const Register = ({ onSubmit }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-        onSubmit={(e) => handleRegister(e, { email, password })}
+        onSubmit={(e) => handleRegister(e, { name, email, password })}
         className="auth-form"
       >
         <h2 className="auth-title">Join HealU</h2>

@@ -17,7 +17,9 @@ const Feedback = () => {
     const fetchFeedbacks = async () => {
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/api/feedback");
+        const response = await fetch(
+          "https://healu-backend.onrender.comapi/feedback"
+        );
         if (response.ok) {
           const data = await response.json();
           setPreviousFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...data]);

@@ -102,3 +102,21 @@
     color: aliceblue;
   }
 }
+
+.logout-button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  background: #e63946;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.logout-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+}

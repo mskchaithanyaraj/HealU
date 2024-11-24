@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Cookies from "js-cookie";
 import healuHealthMatters from "../../assets/heart.png";
 import "./index.css";
 
@@ -8,6 +9,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    alert("You have successfully logged out!");
+    window.location.href = "/"; // Redirect to home page after logout
+  };
 
   return (
     <nav className="navbar-container">
@@ -69,6 +76,14 @@ const Navbar = () => {
           >
             Feedback
           </Link>
+        </li>
+        <li>
+          <button
+            className="navbar-link-item logout-button"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
         </li>
       </ul>
     </nav>

@@ -40,13 +40,16 @@ const Feedback = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: feedback }),
-      });
+      const response = await fetch(
+        "https://healu-backend.onrender.com/api/feedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: feedback }),
+        }
+      );
 
       if (response.ok) {
         setFeedback("");

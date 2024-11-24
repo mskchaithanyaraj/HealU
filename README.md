@@ -93,6 +93,7 @@ healu/
 │   │   ├── BMICalculator/
 │   │   │   ├── index.js
 │   │   │   └── index.css
+|   |   ├── AND MORE COMPONENTS 
 │   └── App.js
 │   └── index.js
 ├── .gitignore

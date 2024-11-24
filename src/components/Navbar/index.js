@@ -82,7 +82,7 @@ const Navbar = () => {
             className="navbar-link-item logout-button"
             onClick={handleLogout}
           >
-            Logout
+            Log Out
           </button>
         </li>
       </ul>

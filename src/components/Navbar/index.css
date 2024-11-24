@@ -110,6 +110,7 @@
   background: #e63946;
   color: white;
   border-radius: 20px;
+  align-self: center;
   cursor: pointer;
   transition:
     transform 0.3s,

@@ -12,7 +12,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     Cookies.remove("authToken");
-    alert("You have successfully logged out!");
     window.location.href = "/"; // Redirect to home page after logout
   };
 

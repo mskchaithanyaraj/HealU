@@ -28,7 +28,7 @@
 .navbar-items {
   display: flex;
   justify-content: space-around;
-  width: 600px;
+  width: 700px;
   list-style-type: none;
   margin-left: 30px;
 }

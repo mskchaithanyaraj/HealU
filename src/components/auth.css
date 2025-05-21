@@ -10,6 +10,7 @@
     -apple-system,
     sans-serif;
   padding: 20px;
+  margin-top: -70px;
 }
 
 .auth-container {

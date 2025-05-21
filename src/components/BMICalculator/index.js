@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../Navbar";
@@ -13,32 +11,64 @@ function BMICalculator() {
   const [category, setCategory] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [heightUnit, setHeightUnit] = useState("ft");
+  const [feet, setFeet] = useState("");
+  const [inches, setInches] = useState("");
+
+  const handleUnitChange = (e) => {
+    const selectedUnit = e.target.value;
+    if (selectedUnit !== heightUnit) {
+      if (selectedUnit === "ft" && height) {
+        const totalInches = parseFloat(height) / 2.54;
+        const ft = Math.floor(totalInches / 12);
+        const inch = Math.round(totalInches % 12);
+        setFeet(ft.toString());
+        setInches(inch.toString());
+      } else if (selectedUnit === "cm" && feet) {
+        const totalCm =
+          parseFloat(feet) * 30.48 + parseFloat(inches || "0") * 2.54;
+        setHeight(Math.round(totalCm).toString());
+      }
+      setHeightUnit(selectedUnit);
+    }
+  };
+
+  const getHeightInCm = () => {
+    if (heightUnit === "cm") return parseFloat(height);
+    const ft = parseFloat(feet) || 0;
+    const inch = parseFloat(inches) || 0;
+    return (ft * 30.48 + inch * 2.54).toFixed(2);
+  };
 
   const calculateBMI = () => {
-    if (height && weight) {
-      setIsCalculating(true);
+    if ((heightUnit === "cm" && height) || (heightUnit === "ft" && feet)) {
+      if (weight) {
+        setIsCalculating(true);
 
-      // Simulate calculation delay for better UX
-      setTimeout(() => {
-        const heightInMeters = height / 100;
-        const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(
-          1
-        );
-        setBmi(bmiValue);
-        setShowResult(true);
+        setTimeout(() => {
+          const heightCm = getHeightInCm();
+          const heightInMeters = heightCm / 100;
 
-        if (bmiValue < 18.5) {
-          setCategory("Underweight");
-        } else if (bmiValue >= 18.5 && bmiValue <= 24.9) {
-          setCategory("Normal weight");
-        } else if (bmiValue >= 25 && bmiValue <= 29.9) {
-          setCategory("Overweight");
-        } else {
-          setCategory("Obese");
-        }
+          const bmiValue = (
+            parseFloat(weight) /
+            (heightInMeters * heightInMeters)
+          ).toFixed(1);
+          setBmi(bmiValue);
+          setShowResult(true);
 
-        setIsCalculating(false);
-      }, 800);
+          if (bmiValue < 18.5) {
+            setCategory("Underweight");
+          } else if (bmiValue >= 18.5 && bmiValue <= 24.9) {
+            setCategory("Normal weight");
+          } else if (bmiValue >= 25 && bmiValue <= 29.9) {
+            setCategory("Overweight");
+          } else {
+            setCategory("Obese");
+          }
+
+          setIsCalculating(false);
+        }, 800);
+      }
     } else {
       setBmi(null);
       setCategory("");
@@ -51,13 +81,13 @@ function BMICalculator() {
 
     switch (category) {
       case "Underweight":
-        return "#3498db"; // Blue
+        return "#3498db";
       case "Normal weight":
-        return "#2ecc71"; // Green
+        return "#2ecc71";
       case "Overweight":
-        return "#f39c12"; // Orange
+        return "#f39c12";
       case "Obese":
-        return "#e74c3c"; // Red
+        return "#e74c3c";
       default:
         return "#777";
     }
@@ -80,15 +110,11 @@ function BMICalculator() {
     }
   };
 
-  // Calculate meter position (0-100%)
   const getMeterPosition = () => {
     if (!bmi) return 0;
-
     const bmiNum = parseFloat(bmi);
     if (bmiNum <= 10) return 0;
     if (bmiNum >= 40) return 100;
-
-    // Map BMI 10-40 to 0-100%
     return ((bmiNum - 10) / 30) * 100;
   };
 
@@ -120,24 +146,68 @@ function BMICalculator() {
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   placeholder="Enter your weight"
+                  min="1"
+                  max="500"
                 />
               </div>
 
               <div className="input-group">
-                <label htmlFor="height">Height (cm)</label>
-                <input
-                  id="height"
-                  type="number"
-                  value={height}
-                  onChange={(e) => setHeight(e.target.value)}
-                  placeholder="Enter your height"
-                />
+                <div className="height-label-group">
+                  <label htmlFor="height">Height</label>
+                  <select
+                    className="unit-selector"
+                    value={heightUnit}
+                    onChange={handleUnitChange}
+                  >
+                    <option value="cm">Centimeters</option>
+                    <option value="ft">Feet & Inches</option>
+                  </select>
+                </div>
+                {heightUnit === "cm" ? (
+                  <input
+                    id="height"
+                    type="number"
+                    value={height}
+                    onChange={(e) => setHeight(e.target.value)}
+                    placeholder="Enter height in cm"
+                    min="1"
+                    max="300"
+                  />
+                ) : (
+                  <div className="height-imperial">
+                    <input
+                      type="number"
+                      value={feet}
+                      onChange={(e) => setFeet(e.target.value)}
+                      placeholder="ft"
+                      min="0"
+                      max="10"
+                      className="feet-input"
+                    />
+                    <input
+                      type="number"
+                      value={inches}
+                      onChange={(e) => setInches(e.target.value)}
+                      placeholder="in"
+                      min="0"
+                      max="11"
+                      className="inches-input"
+                    />
+                  </div>
+                )}
               </div>
 
               <button
                 className={`btn-calculate ${isCalculating ? "loading" : ""}`}
                 onClick={calculateBMI}
-                disabled={isCalculating || !height || !weight}
+                disabled={
+                  isCalculating ||
+                  !(
+                    (heightUnit === "cm" && height) ||
+                    (heightUnit === "ft" && feet)
+                  ) ||
+                  !weight
+                }
               >
                 {isCalculating ? (
                   <>

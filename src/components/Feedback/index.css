@@ -310,6 +310,9 @@
 
 /* Responsive design */
 @media screen and (max-width: 900px) {
+  .feedback-textarea {
+    width: 93%;
+  }
   .feedback-grid {
     grid-template-columns: 1fr;
   }
@@ -322,6 +325,7 @@
   .recent-feedbacks {
     padding: 20px;
   }
+
   .recent-feedbacks {
     width: 91%;
     margin-top: 60px;

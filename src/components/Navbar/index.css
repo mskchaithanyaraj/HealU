@@ -1,123 +1,210 @@
-/* Navbar container */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --navbar-height: 70px; /* Approximate height of navbar */
+}
+
+/* This ensures the main content starts below the navbar */
+body {
+  padding-top: var(--navbar-height);
+  margin: 0;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 15px 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-scrolled {
+  padding: 10px 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --navbar-height: 60px;
+}
+
 .navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  margin: 0; /* Remove margin for a fixed position */
-  position: fixed; /* Makes the navbar fixed at the top */
-  top: 0; /* Ensure it stays at the very top */
-  left: 0;
-  right: 0;
-  width: 100%; /* Span the full width of the viewport */
-  z-index: 1000; /* Keep it above other content */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for separation */
-}
-.main-content {
-  padding-top: 80px; /* Adjust based on the navbar height */
-}
-.navbar-container {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 0 20px;
 }
 
-/* Navbar items for desktop */
-.navbar-items {
+.navbar-logo {
   display: flex;
-  justify-content: space-around;
-  width: 700px;
-  list-style-type: none;
-  margin-left: 30px;
+  align-items: center;
 }
 
-.small-heart-icon {
-  height: 20px;
-  width: 30px;
-}
-
-/* Style for navbar links */
-.navbar-link-item {
-  color: #2c2f24;
+.logo-link {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  padding: 12px;
-  border-radius: 13px;
-  font-size: 15px;
-  font-family: "Poppins";
+  transition: transform 0.3s ease;
 }
 
-.navbar-link-item:hover {
-  background-color: rgba(2, 0, 0, 0.5);
-  color: aliceblue;
+.logo-link:hover {
+  transform: scale(1.05);
 }
 
-/* Mobile styles */
-.menu-toggle-icon {
+.logo-icon {
+  height: 28px;
+  width: 38px;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #333;
+  background: linear-gradient(45deg, #e91e63, #ff6090);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-toggle {
   display: none;
-  font-size: 24px;
   cursor: pointer;
 }
-.cancel-link-styling {
-  text-decoration: none;
-  color: #2c2f24;
+
+.menu-icon {
+  font-size: 1.5rem;
+  color: #e91e63;
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 768px) {
-  .navbar-items {
-    display: none; /* Hide navbar items initially on mobile */
-    flex-direction: column;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 90%;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
+.navbar-menu {
+  display: flex;
+  align-items: center;
+}
 
-  .navbar-items.show-menu {
-    display: flex; /* Show the navbar items when menu is open */
-  }
+.nav-items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
 
-  .menu-toggle-icon {
-    display: block; /* Display the toggler icon on mobile */
-    color: #2c2f24;
-  }
+.nav-item {
+  margin: 0 5px;
+}
 
-  .navbar-link-item {
-    font-size: 20px;
-    padding: 10px; /* Add padding for spacing */
-    display: block; /* Ensures each link takes full width */
-    width: 100%; /* Ensures the link fills the width of the navbar */
-    text-align: center; /* Center the text for better alignment */
-    color: #2c2f24; /* Ensure the link color matches your design */
-  }
+.nav-link {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: block;
+}
 
-  .navbar-link-item:hover {
-    background-color: rgba(2, 0, 0, 0.5);
-    color: aliceblue;
-  }
+.nav-link:hover {
+  color: #e91e63;
+  background-color: rgba(233, 30, 99, 0.08);
 }
 
 .logout-button {
-  padding: 8px 16px;
-  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
   border: none;
-  background: #e63946;
+  background: linear-gradient(45deg, #e91e63, #ff6090);
   color: white;
-  border-radius: 20px;
-  align-self: center;
+  border-radius: 8px;
   cursor: pointer;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(233, 30, 99, 0.2);
 }
 
 .logout-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(233, 30, 99, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(233, 30, 99, 0.2);
+}
+
+/* For pages that need specific adjustments */
+.page-content {
+  padding-top: var(--navbar-height);
+}
+
+/* Adjust the hero section in homepage to account for navbar */
+.hero-section {
+  padding-top: 40px; /* Reduced from 120px since we have body padding now */
+}
+
+/* Mobile Styles */
+@media (max-width: 992px) {
+  :root {
+    --navbar-height: 65px; /* Slightly smaller on mobile */
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-150%);
+    transition: transform 0.4s ease;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .navbar-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-items {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-item {
+    margin: 8px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link {
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  .logout-item {
+    margin-top: 15px;
+  }
+
+  .logout-button {
+    width: 80%;
+    padding: 12px 20px;
+  }
 }

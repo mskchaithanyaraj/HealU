@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
 import Cookies from "js-cookie";
-import "./index.css";
+import { loadingMessages } from "../../utils/authMessages";
+import "../auth.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // State to control loading spinner
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [tipIndex, setTipIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = Cookies.get("authToken");
     if (token) {
-      // Redirect to home if token exists
       navigate("/", { replace: true });
     }
   }, [navigate]);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    setLoading(true); // Start loading spinner
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setTipIndex((prev) => (prev + 1) % loadingMessages.length);
+      }, 2000); // Change message every 2 seconds
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const credentials = { email, password };
-
       const response = await fetch(
         "https://healu-backend.onrender.com/api/auth/login",
         {
@@ -32,77 +43,93 @@ const Login = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(credentials),
+          body: JSON.stringify({ email, password }),
         }
       );
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        alert(`Login failed: ${errorData.message}`);
-        setLoading(false); // Stop loading spinner
-        return;
+        throw new Error(data.message || "Login failed");
       }
 
-      const result = await response.json();
-      Cookies.set("authToken", result.token, { expires: 1 });
+      Cookies.set("authToken", data.token, { expires: 1 });
       navigate("/", { replace: true });
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("An error occurred during login. Please try again later.");
-      setLoading(false); // Stop loading spinner
+    } catch (err) {
+      setError(err.message || "An error occurred during login");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5 }}
-        onSubmit={handleLogin}
-        className="auth-form"
-      >
-        <h2 className="auth-title">Login to HealU</h2>
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-logo">
+          <Heart />
+        </div>
 
-        {loading ? (
-          <div className="spinner-container">
-            <div className="spinner"></div>{" "}
-            {/* Spinner is shown during loading */}
-          </div>
-        ) : (
-          <>
+        <div className="auth-header">
+          <h1>
+            Welcome to <span>HealU</span>
+          </h1>
+          <p>
+            Your journey to wellness begins here. Sign in to access personalized
+            nutrition guidance and health insights.
+          </p>
+        </div>
+
+        {error && <div className="auth-error">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <Mail />
             <input
+              id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="healu@gmail.com"
+              placeholder="Enter your email"
               required
-              className="auth-input"
+              disabled={loading}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <Lock />
             <input
+              id="password"
               type="password"
-              placeholder="healu2024"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
               required
-              className="auth-input"
+              disabled={loading}
             />
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              type="submit"
-              className="auth-button"
-            >
-              Login
-            </motion.button>
-          </>
-        )}
+          </div>
 
-        <p className="auth-switch">
-          Don't have an account? <Link to="/register">Register</Link>
-        </p>
-      </motion.form>
+          <button type="submit" className="auth-button" disabled={loading}>
+            {loading ? (
+              <>
+                <div className="spinner" />
+                <span>{loadingMessages[tipIndex]}</span>
+              </>
+            ) : (
+              <>
+                <span>Sign in</span>
+                <ArrowRight />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="auth-links">
+          Don't have an account?
+          <Link to="/register">Create one now</Link>
+        </div>
+      </div>
     </div>
   );
 };

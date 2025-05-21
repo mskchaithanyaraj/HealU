@@ -1,27 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { Heart, Mail, Lock, User, ArrowRight } from "lucide-react";
 import Cookies from "js-cookie";
-import "./index.css";
+import { loadingMessages } from "../../utils/authMessages";
+import "../auth.css";
 
-const Register = ({ onSubmit }) => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [tipIndex, setTipIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = Cookies.get("authToken");
     if (token) {
-      // Redirect to home if token exists
       navigate("/", { replace: true });
     }
   }, [navigate]);
 
-  const handleRegister = async (event, userData) => {
-    event.preventDefault();
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setTipIndex((prev) => (prev + 1) % loadingMessages.length);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Passwords don't match");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
     setLoading(true);
+    setError("");
+
     try {
       const response = await fetch(
         "https://healu-backend.onrender.com/api/auth/register",
@@ -30,80 +56,123 @@ const Register = ({ onSubmit }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(userData),
+          body: JSON.stringify({ name, email, password }),
         }
       );
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
-        setLoading(false);
-        return;
+        throw new Error(data.message || "Registration failed");
       }
-      navigate("/login", { replace: true });
-    } catch (error) {
-      console.log(error);
-      alert("An error occurred during registration. Please try again later.");
+
+      navigate("/login", {
+        replace: true,
+        state: { registered: true },
+      });
+    } catch (err) {
+      setError(err.message || "An error occurred during registration");
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="auth-container">
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5 }}
-        onSubmit={(e) => handleRegister(e, { name, email, password })}
-        className="auth-form"
-      >
-        <h2 className="auth-title">Join HealU</h2>
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-logo">
+          <Heart />
+        </div>
 
-        {loading ? (
-          <div className="spinner-container">
-            <div className="spinner"></div> {/* Add your spinner here */}
-          </div>
-        ) : (
-          <>
+        <div className="auth-header">
+          <h1>
+            Join <span>HealU</span> Today
+          </h1>
+          <p>
+            Create your account and start your journey to better health with
+            personalized nutrition guidance.
+          </p>
+        </div>
+
+        {error && <div className="auth-error">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <User />
             <input
+              id="name"
               type="text"
-              placeholder="Full Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your full name"
               required
-              className="auth-input"
+              disabled={loading}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <Mail />
             <input
+              id="email"
               type="email"
-              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
               required
-              className="auth-input"
+              disabled={loading}
             />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <Lock />
             <input
+              id="password"
               type="password"
-              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Create a password"
               required
-              className="auth-input"
+              disabled={loading}
             />
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              type="submit"
-              className="auth-button"
-            >
-              Register
-            </motion.button>
-          </>
-        )}
-        <p className="auth-switch">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-      </motion.form>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <Lock />
+            <input
+              id="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your password"
+              required
+              disabled={loading}
+            />
+          </div>
+
+          <button type="submit" className="auth-button" disabled={loading}>
+            {loading ? (
+              <>
+                <div className="spinner" />
+                <span>{loadingMessages[tipIndex]}</span>
+              </>
+            ) : (
+              <>
+                <span>Create Account</span>
+                <ArrowRight />
+              </>
+            )}
+          </button>
+        </form>
+
+        <div className="auth-links">
+          Already have an account?
+          <Link to="/login">Sign in</Link>
+        </div>
+      </div>
     </div>
   );
 };

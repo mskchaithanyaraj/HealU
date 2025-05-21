@@ -8,8 +8,11 @@ import Feedback from "./components/Feedback";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useBotpressChat } from "./hooks/useBotpressChat";
 
 const App = () => {
+  // This hook will handle the Botpress chat visibility
+  useBotpressChat();
   return (
     <Router>
       <Routes>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
+import { Heart, Mail, Lock, ArrowRight, Info } from "lucide-react";
 import Cookies from "js-cookie";
 import { loadingMessages } from "../../utils/authMessages";
 import "../auth.css";
@@ -11,6 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [tipIndex, setTipIndex] = useState(0);
+  const [showCredentials, setShowCredentials] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,6 +78,24 @@ const Login = () => {
             Your journey to wellness begins here. Sign in to access personalized
             nutrition guidance and health insights.
           </p>
+        </div>
+
+        <div
+          className="sample-credentials"
+          onClick={() => setShowCredentials(!showCredentials)}
+        >
+          <Info size={16} />
+          <span>Sample Credentials</span>
+          {showCredentials && (
+            <div className="credentials-tooltip">
+              <p>
+                <strong>Email:</strong> healu@gmail.com
+              </p>
+              <p>
+                <strong>Password:</strong> healu2024
+              </p>
+            </div>
+          )}
         </div>
 
         {error && <div className="auth-error">{error}</div>}
